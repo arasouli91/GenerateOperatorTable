@@ -73,7 +73,6 @@ SetProperty(OperatorData* aOperatorData, string aName, string aValue)
 	}
 }
 
-
 static bool
 SetOperator(OperatorData*   aOperatorData,
 	nsOperatorFlags			aForm,
@@ -82,8 +81,6 @@ SetOperator(OperatorData*   aOperatorData,
 	string&					comment)
 
 {
-	static const char16_t kNullCh = char16_t('\0');
-
 	// aOperator is in the expanded format \uNNNN\uNNNN ...
 	int32_t i = 0;
 	int32_t len = aOperator.length();
@@ -180,8 +177,7 @@ int main()
 {
 	ifstream inFile("mathfont.properties");
 	ofstream outFile("operatorTableCode.txt");
-	vector<string> compoundRows;
-	map<int, string> rows;
+	vector<pair<OperatorData, vector<string>>> compoundRows, rows;
 	int compoundCount = 0, count = 0;
 	while (inFile) {
 		string line;
@@ -216,120 +212,94 @@ int main()
 			else continue; // input is not applicable
 			// remove form
 			name = name.substr(0, len );
-			///cout << "      "<<name.size()<<" "<<name << "      " << attributes << endl;
 
 			string comment = "";
 			OperatorData dummyData;
 			OperatorData* operatorData = &dummyData;
-			// See if the operator should be retained
-			///cout <<endl<< name << " " << attributes << endl<<endl;
 
+			// If the operator should be retained
+			//	construct row for table
 			if (SetOperator(operatorData, form, name, attributes, comment)) {
 				bool prev = 0;
 				stringstream ss;
-				ss << hex << static_cast<int>(static_cast<char16_t>(operatorData->mStr[0])) 
-					<< dec << ", " << int(operatorData->mTrailingSpace) << ", "
-					<< int(operatorData->mLeadingSpace) << ", " << int(form);
+				ss << "{ NS_LITERAL_STRING(\""<< name << "\"), " << int(operatorData->mTrailingSpace) 
+					<< ", " << int(operatorData->mLeadingSpace) << ", ";
+				if (form == NS_MATHML_OPERATOR_FORM_INFIX)
+					ss << "NS_MATHML_OPERATOR_FORM_INFIX ";
+				else if (form == NS_MATHML_OPERATOR_FORM_PREFIX)
+					ss << "NS_MATHML_OPERATOR_FORM_PREFIX ";
+				else if (form == NS_MATHML_OPERATOR_FORM_POSTFIX)
+					ss << "NS_MATHML_OPERATOR_FORM_POSTFIX ";
 				if (operatorData->mFlags & NS_MATHML_OPERATOR_STRETCHY) {
-					ss << ", NS_MATHML_OPERATOR_STRETCHY ";
+					ss << "| NS_MATHML_OPERATOR_STRETCHY ";
 					prev = 1;
 				}
 				if (operatorData->mFlags & NS_MATHML_OPERATOR_FENCE) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_FENCE ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_FENCE ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_ACCENT) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_ACCENT ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_ACCENT ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_LARGEOP) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_LARGEOP ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_LARGEOP ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_SEPARATOR) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_SEPARATOR ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_SEPARATOR ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_MOVABLELIMITS) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_MOVABLELIMITS ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_MOVABLELIMITS ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_SYMMETRIC) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_SYMMETRIC ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_SYMMETRIC ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_INTEGRAL) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_INTEGRAL ";
-					prev = 1;
+					ss << "| NS_MATHML_OPERATOR_INTEGRAL ";
 				}
 				if(operatorData->mFlags & NS_MATHML_OPERATOR_MIRRORABLE) {
-					if (prev) ss << "| ";
-					else ss << ", ";
-					ss << "NS_MATHML_OPERATOR_MIRRORABLE ";
+					ss << "| NS_MATHML_OPERATOR_MIRRORABLE ";
 				}
-				if(inFile) 	ss << "}, //" << comment << endl;
-				else ss << "} //" << comment << endl;
+				vector<string> s{ ss.str(), comment };
 				// If compound operator: save row for compound operator table
 				if (name.length() > 6) {
 					++compoundCount;
-					compoundRows.push_back(ss.str());
+					compoundRows.push_back(make_pair(*operatorData, s ));
 				}
 				else {
-					//cout << hex<<static_cast<int>(static_cast<char16_t>(operatorData->mStr[0]));
-					//cout << endl;
 					++count;
-					//outFile << ss.str();
-					rows.insert(make_pair(static_cast<int>(static_cast<char16_t>(operatorData->mStr[0])), ss.str()));
+					rows.push_back(make_pair(*operatorData, s ));
 				}
 			}
 		}
 	}
-	outFile << "};" << endl;
-	// Output compound operator table
-	//cout << "here" << endl;
-	for (auto it : compoundRows)
+
+	// Sort tables
+	sort(begin(rows), end(rows));
+	sort(begin(compoundRows), end(compoundRows));
+
+	// Output tables to file
+	for (int i = 0; i < rows.size(); ++i)
 	{
-		outFile << it;
+		outFile << rows[i].second[0];
+		if (i < rows.size() - 1) outFile << "}, //";
+		else outFile << "} //";
+		outFile << rows[i].second[1] << endl;
 	}
+	outFile << "};" << endl << endl;
+	for (int i = 0; i < compoundRows.size(); ++i)
+	{
+		outFile << compoundRows[i].second[0];
+		if (i < compoundRows.size() - 1) outFile << "}, //";
+		else outFile << "} //";
+		outFile << compoundRows[i].second[1] << endl;
+	}
+	outFile << "};" << endl << endl;
+
 	cout << dec << compoundCount << " " << count;
-	int fff;
-	cin >> fff;
+
+	int wait;
+	cin >> wait;
 	return 0;
 }
 
-//TODO: format comments: remove ampersand, add spaces(detect camel case), then capitalize all
-
-
-static bool
-compare(OperatorData a, OperatorData b)
-{
-	// order of preference: infix, postfix, prefix.
-	// Check forms in order, if a form is found, it will break right there
-	OperatorData* found;
-	int32_t form = NS_MATHML_OPERATOR_GET_FORM(aForm);
-	if (!(found = GetOperatorData(aOperator, form))) {	// if did not find operator w/ form	
-		if (form == NS_MATHML_OPERATOR_FORM_INFIX ||	// if infix form
-			!(found = GetOperatorData(aOperator, NS_MATHML_OPERATOR_FORM_INFIX))) {	// OR infix form of operator not found
-			if (form == NS_MATHML_OPERATOR_FORM_POSTFIX ||	// if postfix form
-				!(found = GetOperatorData(aOperator, NS_MATHML_OPERATOR_FORM_POSTFIX))) {	// OR postfix form not found
-				if (form != NS_MATHML_OPERATOR_FORM_PREFIX) {	// if not prefix form
-					found = GetOperatorData(aOperator, NS_MATHML_OPERATOR_FORM_PREFIX);	// look for prefix form
-				}
-			}
-		}
-	}
-}
+//TODO: format comments: remove ampersand, add spaces(detect camel case), capitalize all
+//OR NOT TODO?
