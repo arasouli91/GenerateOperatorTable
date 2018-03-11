@@ -5,15 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include "nsMathMLOperators.h"
-#include "nsCOMPtr.h"
-#include "nsDataHashtable.h"
-#include "nsHashKeys.h"
-#include "nsTArray.h"
-
-#include "nsIPersistentProperties2.h"
-#include "nsISimpleEnumerator.h"
 #include "nsContentUtils.h"
-#include "nsCRT.h"
 
 // operator dictionary entry
 struct OperatorData {
@@ -1209,7 +1201,7 @@ SequentialOpSearch(const OperatorData* opTable,
 				   const OperatorData&  aOperator,
 				   uint16_t ndx, uint16_t size)
 {
-	uint8_t left = ndx;
+	uint16_t left = ndx;
 	// Check current and up to 2 forward operators for matching form
 	for (uint8_t i = 0; i <= 2 && ndx + i < size; ++i)
 	{
@@ -1247,10 +1239,10 @@ SequentialOpSearch(const OperatorData* opTable,
 static const OperatorData*
 OperatorSearch(const OperatorData* opTable,
 			   const OperatorData&  aOperator,
-			   uint16_t f, uint16_t l, uint16_t size)
+			   int16_t f, int16_t	l, uint16_t size)
 {
 	auto mid = f + (l - f) / 2;
-	if (f < l) {
+	if (f <= l) {
 		if (aOperator < opTable[mid])
 			return OperatorSearch(opTable, aOperator, f, mid - 1, size);
 		if (opTable[mid] < aOperator)
@@ -1274,7 +1266,7 @@ GetOperatorData(const nsString& aOperator, nsOperatorFlags aForm)
 	// Decide which table to search in
 	uint16_t size;
 	const OperatorData* opTable;
-	if (aOperator.Length() > 1) {
+	if (aOperator.Length() == 1) {
 		opTable = gOperatorTable;
 		size = gOperatorCount;
 	}
@@ -1283,7 +1275,7 @@ GetOperatorData(const nsString& aOperator, nsOperatorFlags aForm)
 		size = gCompoundOperCount;
 	}
 	// search for operator, if not found return nullptr
-	return OperatorSearch(opTable, dummy, 0, size, size);
+	return OperatorSearch(opTable, dummy, 0, size, size-1);
 }
 
 bool
