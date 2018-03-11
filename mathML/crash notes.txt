@@ -1,0 +1,57 @@
+###!!! [Parent][MessageChannel] Error: (msgtype=0x15007F,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+++DOCSHELL 0FA1F800 == 5 [pid = 12840] [id = {64145751-d6ea-4b0a-a57d-c7d154ab1a92}]
+++DOMWINDOW == 11 (18F0A840) [pid = 12840] [serial = 16] [outer = 00000000]
+++DOMWINDOW == 12 (1AEC4400) [pid = 12840] [serial = 17] [outer = 18F0A840]
+[Parent 12840, Gecko_IOThread] WARNING: file c:/mozilla-source/mozilla-central/ipc/chromium/src/base/process_util_win.cc, line 188
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_TRUE(aSecondURI) failed: file c:/mozilla-source/mozilla-central/dom/base/ThirdPartyUtil.cpp, line 98
+++DOMWINDOW == 13 (1AEBC800) [pid = 12840] [serial = 18] [outer = 18F0A840]
+--DOMWINDOW == 12 (1AEC4400) [pid = 12840] [serial = 17] [outer = 00000000] [url = about:blank]
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 429
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(mStatus, *this) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 584
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(mStatus, mStatus) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 623
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 429
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(mStatus, *this) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 584
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(mStatus, mStatus) failed with result 0x804B000A: file c:\mozilla-source\mozilla-central\obj-i686-pc-mingw32\dist\include\nsIURIMutator.h, line 623
+--DOCSHELL 0FA1F800 == 4 [pid = 12840] [id = {64145751-d6ea-4b0a-a57d-c7d154ab1a92}]
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+[Parent 12840, Main Thread] WARNING: NS_ENSURE_SUCCESS(rv, rv) failed with result 0x80040111: file c:/mozilla-source/mozilla-central/netwerk/protocol/http/nsHttpChannel.cpp, line 3946
+--DOMWINDOW == 11 (18F0A840) [pid = 12840] [serial = 16] [outer = 00000000] [url = about:tabcrashed?e=tabcrashed&u=https%3A//developer.mozilla.org/en-US/docs/Mozilla/MathML_Project/MathML_Torture_Test&c=UTF-8&f=regular&d=MathML%20Torture%20Test%20-%20Mozilla%20%7C%20MDN]
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x15008C,name=PBrowser::Msg_UpdateNativeWindowHandle) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x15007F,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+++DOCSHELL 07980400 == 5 [pid = 12840] [id = {94079d3b-cbd9-47d2-9742-5d79329f02d0}]
+++DOMWINDOW == 12 (0CE7EB00) [pid = 12840] [serial = 19] [outer = 00000000]
+++DOMWINDOW == 13 (1AA8C400) [pid = 12840] [serial = 20] [outer = 0CE7EB00]
+++DOMWINDOW == 14 (1AC74400) [pid = 12840] [serial = 21] [outer = 0CE7EB00]
+[Parent 12840, Gecko_IOThread] WARNING: file c:/mozilla-source/mozilla-central/ipc/chromium/src/base/process_util_win.cc, line 188
+--DOMWINDOW == 13 (1AEBC800) [pid = 12840] [serial = 18] [outer = 00000000] [url = about:tabcrashed?e=tabcrashed&u=https%3A//developer.mozilla.org/en-US/docs/Mozilla/MathML_Project/MathML_Torture_Test&c=UTF-8&f=regular&d=MathML%20Torture%20Test%20-%20Mozilla%20%7C%20MDN]
